@@ -9,7 +9,7 @@ Trickle is a workplace for team to align information. https://www.trickle.so, if
 - Create a Trickle
 ```
 - name: Send trickle
-  uses: visionwx/trickle-sender@v1.0.0
+  uses: visionwx/trickle-sender@v1.0.4
   with:
     trickleToken: xxxx
     workspaceId: xxxx
@@ -28,9 +28,9 @@ Trickle is a workplace for team to align information. https://www.trickle.so, if
     content=`python3 loadJson.py -f blockdata.json`
     echo "::set-output name=blockDataJson::$content"
 
-# Get block data json
+# Send trickle
 - name: Send trickle
-  uses: visionwx/trickle-sender@v1.0.0
+  uses: visionwx/trickle-sender@v1.0.4
   with:
     trickleToken: xxxx
     workspaceId: xxxx
@@ -62,6 +62,20 @@ def main():
 if __name__ == "__main__":
     main()
 ```
+
+- Create a Trickle comment
+```
+# Send trickle comment
+- name: Send trickle comment
+  uses: visionwx/trickle-sender@v1.0.4
+  with:
+    trickleToken: xxxx
+    workspaceId: xxxx
+    memberId: xxxx
+    trickleId: xxxx
+    blockData: '[{"type":"text","value":"this is text deajiofjoawejfojoewfjow"}]'
+```
+
 
 ## Inputs
 - trickleToken: the token of your trickle account

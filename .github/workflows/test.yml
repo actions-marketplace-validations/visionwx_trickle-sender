@@ -26,7 +26,7 @@ jobs:
 
       # Send trickle
       - name: Send trickle
-        uses: visionwx/trickle-sender@v1.0.3
+        uses: visionwx/trickle-sender@v1.0.4
         with:
           trickleToken: ${{ secrets.trickleToken }}
           workspaceId: ${{ env.workspaceId }}
@@ -37,7 +37,7 @@ jobs:
       
       # Send trickle comment
       - name: Send trickle comment
-        uses: visionwx/trickle-sender@v1.0.3
+        uses: visionwx/trickle-sender@v1.0.4
         with:
           trickleToken: ${{ secrets.trickleToken }}
           workspaceId: ${{ env.workspaceId }}
