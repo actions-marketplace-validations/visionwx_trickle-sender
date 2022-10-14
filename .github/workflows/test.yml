@@ -1,0 +1,31 @@
+name: Trickle Sender Test
+
+on:
+  workflow_dispatch:
+
+env:
+  workspaceId: 364397913113100291
+  memberId: 364404407103651845
+  channelId: 364397913113165830
+
+jobs:
+  process:
+    name: main process
+    runs-on: ubuntu-latest
+    steps:
+      # Get block data json
+      - name: Get block data json
+        id: getBlockData
+        run: |
+          content=`python3 loadJson.py -f block_data.json`
+          echo "::set-output name=blockDataJson::$content"
+
+      # Get block data json
+      - name: Send trickle
+        uses: visionwx/trickle-sender@v1.0.0
+        with:
+          trickleToken: ${{ secrets.trickleToken }}
+          workspaceId: ${{ env.workspaceId }}
+          memberId: ${{ env.memberId }}
+          channelId: ${{ env.channelId }}
+          blockData: '${{ steps.getBlockData.outputs.blockDataJson }}'

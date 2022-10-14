@@ -1,0 +1,217 @@
+[
+  {#repo name and branch and pusher#}
+  {% if commits is defined %}
+  {
+    "id": "{{ 'random'|uuid }}",
+    "type": "rich_texts",
+    "atomic": false,
+    "blocks": [],
+    "display": "block",
+    "elements": [
+        {
+            "text": "[{{repository.name}}:{{ref|replace('refs/heads/', '')}}] {{commits|count}} new commits by {{pusher.name}}",
+            "type": "text",
+            "atomic": false
+        }
+    ],
+    "recursive": false,
+    "continuous": false,
+    "nonBreaking": false,
+    "prefixNodesCount": 0
+  },
+  {#every commit info#}
+  {% for commit in commits %}
+  {
+    "id": "{{ 'random'|uuid }}",
+    "type": "rich_texts",
+    "atomic": false,
+    "blocks": [],
+    "display": "block",
+    "elements": [
+        {
+            "text": "{{commit.id[:7]}} {{commit.message}} - {{commit.committer.username}}",
+            "type": "text",
+            "atomic": false
+        }
+    ],
+    "recursive": false,
+    "continuous": false,
+    "nonBreaking": false,
+    "prefixNodesCount": 0
+  }{% if not loop.last %},{% endif %}
+  {% endfor %}
+  {% endif %}
+
+  {% if workflow_run is defined %}
+  {
+    "id": "{{ 'random'|uuid }}",
+    "type": "rich_texts",
+    "atomic": false,
+    "blocks": [],
+    "display": "block",
+    "elements": [
+        {
+            "text": "[{{repository.name}}] Workflow {{workflow_run.name}} by {{workflow_run.actor.login}}",
+            "type": "text",
+            "atomic": false
+        }
+    ],
+    "recursive": false,
+    "continuous": false,
+    "nonBreaking": false,
+    "prefixNodesCount": 0
+  },
+  {
+    "id": "{{ 'random'|uuid }}",
+    "type": "rich_texts",
+    "atomic": false,
+    "blocks": [],
+    "display": "block",
+    "elements": [
+        {
+            "text": "status: {{workflow_run.status}}",
+            "type": "text",
+            "atomic": false
+        }
+    ],
+    "recursive": false,
+    "continuous": false,
+    "nonBreaking": false,
+    "prefixNodesCount": 0
+  },
+  {
+    "id": "{{ 'random'|uuid }}",
+    "type": "rich_texts",
+    "atomic": false,
+    "blocks": [],
+    "display": "block",
+    "elements": [
+        {
+            "text": "conclusion: {{workflow_run.conclusion}}",
+            "type": "text",
+            "atomic": false
+        }
+    ],
+    "recursive": false,
+    "continuous": false,
+    "nonBreaking": false,
+    "prefixNodesCount": 0
+  },
+  {
+    "id": "{{ 'random'|uuid }}",
+    "type": "rich_texts",
+    "atomic": false,
+    "blocks": [],
+    "display": "block",
+    "elements": [
+        {
+            "text": "{{workflow_run.html_url}}",
+            "type": "link",
+            "atomic": false
+        }
+    ],
+    "recursive": false,
+    "continuous": false,
+    "nonBreaking": false,
+    "prefixNodesCount": 0
+  }
+  {% endif %}
+
+  {# Pull Request Open Info #}
+  {% if pull_request is defined %}
+  {
+    "id": "{{ 'random'|uuid }}",
+    "type": "rich_texts",
+    "atomic": false,
+    "blocks": [],
+    "display": "block",
+    "elements": [
+        {
+          {% if action == 'opened' %}
+          "text": "[{{repository.name}}: {{pull_request.base.ref}} <--- {{pull_request.head.ref}}] New Pull Request Opened By {{sender.login}}",
+          {% elif action == 'closed' %}
+          "text": "[{{repository.name}}: {{pull_request.base.ref}} <--- {{pull_request.head.ref}}] Pull Request Closed By {{sender.login}}",
+          {% endif %}
+          "type": "text",
+          "atomic": false
+        }
+    ],
+    "recursive": false,
+    "continuous": false,
+    "nonBreaking": false,
+    "prefixNodesCount": 0
+  },
+  {
+    "id": "{{ 'random'|uuid }}",
+    "type": "rich_texts",
+    "atomic": false,
+    "blocks": [],
+    "display": "block",
+    "elements": [
+        {
+          "text": "【Title】{{pull_request.title}}",
+          "type": "text",
+          "atomic": false
+        }
+    ],
+    "recursive": false,
+    "continuous": false,
+    "nonBreaking": false,
+    "prefixNodesCount": 0
+  },
+  {
+    "id": "{{ 'random'|uuid }}",
+    "type": "rich_texts",
+    "atomic": false,
+    "blocks": [],
+    "display": "block",
+    "elements": [
+        {
+          "text": "【State】{{pull_request.state}}",
+          "type": "text",
+          "atomic": false
+        }
+    ],
+    "recursive": false,
+    "continuous": false,
+    "nonBreaking": false,
+    "prefixNodesCount": 0
+  },
+  {
+    "id": "{{ 'random'|uuid }}",
+    "type": "rich_texts",
+    "atomic": false,
+    "blocks": [],
+    "display": "block",
+    "elements": [
+        {
+          "text": "【Locked】 {{pull_request.locked}}",
+          "type": "text",
+          "atomic": false
+        }
+    ],
+    "recursive": false,
+    "continuous": false,
+    "nonBreaking": false,
+    "prefixNodesCount": 0
+  },
+  {
+    "id": "{{ 'random'|uuid }}",
+    "type": "rich_texts",
+    "atomic": false,
+    "blocks": [],
+    "display": "block",
+    "elements": [
+        {
+          "text": "【Link】 {{pull_request.html_url}}",
+          "type": "text",
+          "atomic": false
+        }
+    ],
+    "recursive": false,
+    "continuous": false,
+    "nonBreaking": false,
+    "prefixNodesCount": 0
+  }
+  {% endif %}
+]

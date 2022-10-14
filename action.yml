@@ -1,0 +1,35 @@
+name: 'Trickle Sender'
+description: 'This github action is used to send trickle post and comment'
+author: 'VisionWX'
+branding:
+  icon: 'upload'
+  color: 'gray-dark'
+inputs:
+  trickleToken:
+    description: 'Trickle token.'
+    required: true
+  workspaceId:
+    description: 'Trickle workspaceId'
+    required: true
+  memberId:
+    description: 'MemberId for this workspace'
+    required: true
+  channelId:
+    description: 'Trickle channelId'
+    required: true
+  trickleId:
+    description: 'TrickleId, required when you want send comment for a trickle'
+    required: false
+  blockData:
+    description: 'Block data'
+    required: true
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  env:
+    trickleToken: ${{ inputs.trickleToken }}
+    workspaceId: ${{ inputs.workspaceId }}
+    memberId: ${{ inputs.memberId }}
+    channelId: ${{ inputs.channelId }}
+    trickleId: ${{ inputs.trickleId }}
+    blockData: ${{ inputs.blockData }}

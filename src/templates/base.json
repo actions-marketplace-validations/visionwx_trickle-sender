@@ -1,0 +1,94 @@
+[
+  {% if title is defined %}
+  {
+    "id": "{{ 'random'|uuid }}",
+    "type": "h3",
+    "isFirst": false,
+    "indent": 0,
+    "blocks": [],
+    "display": "block",
+    "elements": [
+      {
+        "id": "{{ 'random'|uuid }}",
+        "type": "text",
+        "text": "{{title}}",
+        "elements": [],
+        "isCurrent": false
+      }
+    ],
+    "isCurrent": false,
+    "constraint": "free"
+  },
+  {% endif %}
+
+  {% if description is defined %}
+  {
+    "id": "{{ 'random'|uuid }}",
+    "type": "rich_texts",
+    "isFirst": false,
+    "indent": 0,
+    "blocks": [],
+    "display": "block",
+    "elements": [
+      {
+        "id": "{{ 'random'|uuid }}",
+        "type": "text",
+        "text": "{{description}}",
+        "elements": [],
+        "isCurrent": false
+      }
+    ],
+    "isCurrent": false,
+    "constraint": "free"
+  },
+  {% endif %}
+
+  {% if keypoints is defined %}
+  {% for kp in keypoints %}
+  {
+    "id": "{{ 'random'|uuid }}",
+    "type": "list",
+    "isFirst": false,
+    "indent": 0,
+    "blocks": [],
+    "display": "block",
+    "elements": [
+      {
+        "id": "{{ 'random'|uuid }}",
+        "type": "text",
+        "text": "{{kp}}",
+        "elements": [],
+        "isCurrent": false
+      }
+    ],
+    "isCurrent": false,
+    "constraint": "free"
+  },
+  {% endfor %}
+  {% endif %}
+
+  {% if images is defined %}
+  {
+    "id": "{{ 'random'|uuid }}",
+    "type": "gallery",
+    "isFirst": false,
+    "indent": 0,
+    "blocks": [],
+    "display": "block",
+    "elements": [
+      {% for img in images %}
+      {
+        "id": "{{ 'random'|uuid }}",
+        "type": "image",
+        "text": "",
+        "value": "{{img}}",
+        "elements": [],
+        "isCurrent": false
+      }{% if not loop.last %},{% endif %}
+      {% endfor %}
+    ],
+    "isCurrent": false,
+    "constraint": "free"
+  }
+  {% endif %}
+]
