@@ -25,7 +25,7 @@ jobs:
 
       # Get block data json
       - name: Send trickle
-        uses: visionwx/trickle-sender@v1.0.1
+        uses: visionwx/trickle-sender@v1.0.2
         with:
           trickleToken: ${{ secrets.trickleToken }}
           workspaceId: ${{ env.workspaceId }}
