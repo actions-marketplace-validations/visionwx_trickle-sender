@@ -4,9 +4,9 @@ on:
   workflow_dispatch:
 
 env:
-  workspaceId: 364397913113100291
-  memberId: 364404407103651845
-  channelId: 364397913113165830
+  workspaceId: '364397913113100291'
+  memberId: '364404407103651845'
+  channelId: '364397913113165830'
 
 jobs:
   process:
