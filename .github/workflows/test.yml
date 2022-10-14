@@ -4,9 +4,10 @@ on:
   workflow_dispatch:
 
 env:
-  workspaceId: 364397913113100291
-  memberId: 364404407103651845
-  channelId: 364397913113165830
+  workspaceId: "364397913113100291"
+  memberId: "364404407103651845"
+  channelId: "364397913113165830"
+  trickleId: "578759146069819400"
 
 jobs:
   process:
@@ -23,12 +24,23 @@ jobs:
           content=`python3 loadJson.py -f block_data.json`
           echo "::set-output name=blockDataJson::$content"
 
-      # Get block data json
+      # Send trickle
       - name: Send trickle
-        uses: visionwx/trickle-sender@v1.0.2
+        uses: visionwx/trickle-sender@v1.0.3
         with:
           trickleToken: ${{ secrets.trickleToken }}
           workspaceId: ${{ env.workspaceId }}
           memberId: ${{ env.memberId }}
           channelId: ${{ env.channelId }}
+          blockType: trickle
           blockData: '${{ steps.getBlockData.outputs.blockDataJson }}'
+      
+      # Send trickle comment
+      - name: Send trickle comment
+        uses: visionwx/trickle-sender@v1.0.3
+        with:
+          trickleToken: ${{ secrets.trickleToken }}
+          workspaceId: ${{ env.workspaceId }}
+          memberId: ${{ env.memberId }}
+          blockType: comment
+          blockData: '[{"type":"text","value":"hahahahahahah"}]'

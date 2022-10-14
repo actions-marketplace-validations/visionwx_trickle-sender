@@ -48,43 +48,57 @@ class TrickleClient:
     ###
     # Create Trickle Comment API
     def createTrickleComment(self, workspaceId, memberId, 
-        channelId, trickleId, blocks):
-        pass
+        trickleId, blocks):
+        resp = requests.post(
+            url=self.DOMAIN + "/f2b/v1/workspaces/" + workspaceId + "/trickles/" + trickleId + "/comments", 
+            json={
+                "blocks": blocks,
+                "authorMemberId": memberId,
+                "mentionedMemberIds": []
+            }, 
+            headers={"Authorization": "Bearer " + self.token}
+        )
+        print(resp.status_code)
+        print(resp)
+        print(resp.text)
+
+        if not (resp.status_code != 201 or resp.status_code != 200):
+            raise Exception("createTrickleCommentFailed")
     pass
 
 if __name__ == "__main__":
-    # blocks = [
-    #     {
-    #     "id": generateUUID(),
-    #     "type": "rich_texts",
-    #     "isFirst": False,
-    #     "indent": 0,
-    #     "blocks": [],
-    #     "display": "block",
-    #     "elements": [
-    #         {
-    #         "id": generateUUID(),
-    #         "type": "text",
-    #         "text": "Hello World Test 2",
-    #         "elements": [],
-    #         "isCurrent": True
-    #         }
-    #     ],
-    #     "isCurrent": True,
-    #     "constraint": "free"
-    #     }
-    # ]
+    blocks = [
+        {
+        "id": generateUUID(),
+        "type": "rich_texts",
+        "isFirst": False,
+        "indent": 0,
+        "blocks": [],
+        "display": "block",
+        "elements": [
+            {
+            "id": generateUUID(),
+            "type": "text",
+            "text": "Hello World Test 2",
+            "elements": [],
+            "isCurrent": True
+            }
+        ],
+        "isCurrent": True,
+        "constraint": "free"
+        }
+    ]
     # print(blocks)
-    tc = TrickleClient(token="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzMDc2NjA2ODIzMDI1ODY4OSIsImlhdCI6MTY2NTY1NDM2NiwiZXhwIjoxNjk3MTkwMzY2LCJzY29wZSI6ImJyb3dzZXIifQ.8-XY_hmDpXIk60py2_uDkcbScUGPxJvLkfHQUyfZx4g")
+    tc = TrickleClient(token="xxxx")
     # tc.createTrickle(
     #     workspaceId="364397913113100291",
     #     memberId="364404407103651845",
     #     channelId="364397913113165830",
     #     blocks=blocks
     # )
-
-    tc.deleteTrickle(
+    tc.createTrickleComment(
         workspaceId="364397913113100291",
         memberId="364404407103651845",
-        trickleId="578281075944456200"
+        trickleId="578759146069819400",
+        blocks=blocks
     )

@@ -16,9 +16,12 @@ inputs:
     required: true
   channelId:
     description: 'Trickle channelId'
-    required: true
+    required: false
   trickleId:
     description: 'TrickleId, required when you want send comment for a trickle'
+    required: false
+  blockType:
+    description: 'Send trickle or comment block'
     required: false
   blockData:
     description: 'Block data'
@@ -33,3 +36,4 @@ runs:
     channelId: ${{ inputs.channelId }}
     trickleId: ${{ inputs.trickleId }}
     blockData: ${{ inputs.blockData }}
+    blockType: ${{ inputs.blockType }}
