@@ -42,5 +42,6 @@ jobs:
           trickleToken: ${{ secrets.trickleToken }}
           workspaceId: ${{ env.workspaceId }}
           memberId: ${{ env.memberId }}
+          trickleId: ${{ env.trickleId }}
           blockType: comment
           blockData: '[{"type":"text","value":"hahahahahahah"}]'
