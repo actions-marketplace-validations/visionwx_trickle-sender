@@ -21,6 +21,7 @@ class BlockType:
     checkbox = "checkbox"
     gallery = "gallery"
     embed = "embed"
+    embedext = "embedext"
     bookmark = "bookmark"
 
 class BlockTextType:
@@ -47,11 +48,11 @@ class BlockText(Block):
             "display": "block",
             "elements": [
                 {
-                "id": generateUUID(),
-                "type": "text",
-                "text": self.value,
-                "elements": [],
-                "isCurrent": False
+                    "id": generateUUID(),
+                    "type": "text",
+                    "text": self.value,
+                    "elements": [],
+                    "isCurrent": False
                 }
             ],
             "isCurrent": False,
@@ -207,10 +208,11 @@ class BlockBookmark(Block):
         ]
 
 class BlockEmbed(Block):
-    def __init__(self, value):
+    def __init__(self, value, height=300):
         if not (value.startswith("https") or value.startswith("http")):
             raise Exception("BlockEmbed value must be start with https or http")
         self.value = value
+        self.height = height
     def render(self):
         return [
             {
@@ -223,7 +225,10 @@ class BlockEmbed(Block):
                 "elements": [],
                 "isCurrent": True,
                 "constraint": "free",
-                "userDefinedValue": "<iframe src=\"" + self.value + "\" class=\"w-full\" height=300 allow=\"autoplay\" allowfullscreen></iframe>"
+                "userDefinedValue": {
+                    "height": self.height,
+                    "src": "<iframe src=\"" + self.value + "\" class=\"w-full\" allow=\"autoplay\" allowfullscreen></iframe>"
+                }
             }
         ]
 
@@ -281,6 +286,15 @@ def renderBlock(blocks):
         elif bType == BlockType.embed:
             out = out + BlockEmbed(
                 value=bValue,
+            ).render()
+        elif bType == BlockType.embedext:
+            if type(bValue) is not dict:
+                raise Exception("BlockEmbedExt value must be dict")
+            src = bValue.get("src","")
+            height = bValue.get("height",300)
+            out = out + BlockEmbed(
+                value=src,
+                height=height
             ).render()
         elif bType == BlockType.bookmark:
             out = out + BlockBookmark(

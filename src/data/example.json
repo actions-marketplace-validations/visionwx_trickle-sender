@@ -47,6 +47,13 @@
     "value": "https://devres.trickle.so/miniapps/mix-timeline-finance.html"
   },
   {
+    "type": "embedext",
+    "value": {
+      "src": "https://devres.trickle.so/miniapps/mix-timeline-finance.html",
+      "height": 300
+    }
+  },
+  {
     "type": "bookmark",
     "value": "https://www.trickle.so"
   }

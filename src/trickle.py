@@ -1,5 +1,6 @@
 import requests
 from unitls import generateUUID
+import json
 
 class TrickleClient:
     DOMAIN = "https://api.trickle.so"
@@ -67,27 +68,27 @@ class TrickleClient:
     pass
 
 if __name__ == "__main__":
-    blocks = [
-        {
-        "id": generateUUID(),
-        "type": "rich_texts",
-        "isFirst": False,
-        "indent": 0,
-        "blocks": [],
-        "display": "block",
-        "elements": [
-            {
-            "id": generateUUID(),
-            "type": "text",
-            "text": "Hello World Test 2",
-            "elements": [],
-            "isCurrent": True
-            }
-        ],
-        "isCurrent": True,
-        "constraint": "free"
-        }
-    ]
+    # blocks = [
+    #     {
+    #     "id": generateUUID(),
+    #     "type": "rich_texts",
+    #     "isFirst": False,
+    #     "indent": 0,
+    #     "blocks": [],
+    #     "display": "block",
+    #     "elements": [
+    #         {
+    #         "id": generateUUID(),
+    #         "type": "text",
+    #         "text": "Hello World Test 2",
+    #         "elements": [],
+    #         "isCurrent": True
+    #         }
+    #     ],
+    #     "isCurrent": True,
+    #     "constraint": "free"
+    #     }
+    # ]
     # print(blocks)
     tc = TrickleClient(token="xxxx")
     # tc.createTrickle(
@@ -96,9 +97,9 @@ if __name__ == "__main__":
     #     channelId="364397913113165830",
     #     blocks=blocks
     # )
-    tc.createTrickleComment(
-        workspaceId="364397913113100291",
-        memberId="364404407103651845",
-        trickleId="578759146069819400",
-        blocks=blocks
-    )
+    # tc.createTrickleComment(
+    #     workspaceId="364397913113100291",
+    #     memberId="364404407103651845",
+    #     trickleId="578759146069819400",
+    #     blocks=blocks
+    # )
